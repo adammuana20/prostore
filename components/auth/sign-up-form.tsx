@@ -8,11 +8,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import AuthButton from "@/components/auth/auth-button";
 
-import { signInWithCredentials } from "@/lib/actions/user.actions";
-import { signInDefaultValues } from "@/lib/constants";
+import { signUpUser } from "@/lib/actions/user.actions";
+import { signUpDefaultValues } from "@/lib/constants";
 
-const CredentialsSignInForm = () => {
-  const [data, action] = useActionState(signInWithCredentials, {
+const SignUpForm = () => {
+  const [data, action] = useActionState(signUpUser, {
     success: false,
     message: "",
   });
@@ -26,14 +26,23 @@ const CredentialsSignInForm = () => {
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-6">
         <div>
+          <Label htmlFor="name">Name</Label>
+          <Input
+            id="name"
+            name="name"
+            type="name"
+            autoComplete="name"
+            defaultValue={signUpDefaultValues.name}
+          />
+        </div>
+        <div>
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             name="email"
-            type="email"
-            required
+            type="text"
             autoComplete="email"
-            defaultValue={signInDefaultValues.email}
+            defaultValue={signUpDefaultValues.email}
           />
         </div>
         <div>
@@ -44,11 +53,22 @@ const CredentialsSignInForm = () => {
             type="password"
             required
             autoComplete="password"
-            defaultValue={signInDefaultValues.password}
+            defaultValue={signUpDefaultValues.password}
           />
         </div>
         <div>
-          <AuthButton label="Sign In" disabledLabel="Signing In..." />
+          <Label htmlFor="confirmPassword">Confirm Password</Label>
+          <Input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            required
+            autoComplete="confirmPassword"
+            defaultValue={signUpDefaultValues.confirmPassword}
+          />
+        </div>
+        <div>
+          <AuthButton label="Sign Up" disabledLabel="Submitting..." />
         </div>
 
         {data && !data.success && (
@@ -56,9 +76,9 @@ const CredentialsSignInForm = () => {
         )}
 
         <div className="text-sm text-center text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <Link href="/sign-up" target="_self" className="link">
-            Sign Up
+          Already have an account?{" "}
+          <Link href="/sign-in" target="_self" className="link">
+            Sign In
           </Link>
         </div>
       </div>
@@ -66,4 +86,4 @@ const CredentialsSignInForm = () => {
   );
 };
 
-export default CredentialsSignInForm;
+export default SignUpForm;

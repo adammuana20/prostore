@@ -15,12 +15,13 @@ import CredentialsSignInForm from "@/components/auth/credentials-sign-form";
 import { auth } from "@/auth";
 
 import { APP_NAME } from "@/lib/constants";
+import SignUpForm from "@/components/auth/sign-up-form";
 
 export const metadata: Metadata = {
-  title: "Sign In",
+  title: "Sign Up",
 };
 
-const SignInPage = async (props: {
+const SignUpPage = async (props: {
   searchParams: Promise<{ callbackUrl: string }>;
 }) => {
   const { callbackUrl } = await props.searchParams;
@@ -43,12 +44,12 @@ const SignInPage = async (props: {
               priority
             />
           </Link>
-          <CardTitle className="text-center">Sign In</CardTitle>
+          <CardTitle className="text-center">Create Account</CardTitle>
           <CardDescription className="text-center">
-            Sign in to your account
+            Enter your information below to sign up
           </CardDescription>
           <CardContent className="space-y-4">
-            <CredentialsSignInForm />
+            <SignUpForm />
           </CardContent>
         </CardHeader>
       </Card>
@@ -56,4 +57,4 @@ const SignInPage = async (props: {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

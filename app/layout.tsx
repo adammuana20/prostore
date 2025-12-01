@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 
+import { Toaster } from "@/components/ui/sonner";
+
 import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 
 import "@/assets/styles/globals.css";
@@ -26,7 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body
+        suppressHydrationWarning
+        className={`${inter.className} antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -34,6 +39,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
