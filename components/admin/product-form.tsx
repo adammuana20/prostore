@@ -1,11 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ControllerRenderProps, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import slugify from "slugify";
+import Image from "next/image";
 
 import {
   Form,
@@ -18,19 +19,16 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
+import { Card, CardContent } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
 
 import { Product } from "@/types";
 import { insertProductSchema, updateProductSchema } from "@/lib/validators";
 import { productDefaultValues } from "@/lib/constants";
 import { createProduct, updateProduct } from "@/lib/actions/product.actions";
 import { UploadButton } from "@/lib/uploadthing";
-import { Card, CardContent } from "../ui/card";
-import Image from "next/image";
-import { Checkbox } from "../ui/checkbox";
 
-type ProductFormValues =
-  | z.infer<typeof insertProductSchema>
-  | z.infer<typeof updateProductSchema>;
+type ProductFormValues = z.infer<typeof insertProductSchema>;
 
 const ProductForm = ({
   type,
@@ -44,15 +42,13 @@ const ProductForm = ({
   const router = useRouter();
 
   const schema = type === "Update" ? updateProductSchema : insertProductSchema;
-  const form = useForm({
+  const form = useForm<ProductFormValues>({
     resolver: zodResolver(schema),
     defaultValues:
       product && type === "Update" ? product : productDefaultValues,
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof insertProductSchema>> = async (
-    values
-  ) => {
+  const onSubmit: SubmitHandler<ProductFormValues> = async (values) => {
     if (type === "Update" && !productId) {
       router.push("/admin/products");
       return;
@@ -113,7 +109,7 @@ const ProductForm = ({
                       onClick={() => {
                         form.setValue(
                           "slug",
-                          slugify(form.getValues("name"), { lower: true })
+                          slugify(form.getValues("name"), { lower: true }),
                         );
                       }}
                     >
