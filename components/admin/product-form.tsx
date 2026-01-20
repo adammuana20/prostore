@@ -41,33 +41,40 @@ const ProductForm = ({
 }) => {
   const router = useRouter();
 
-  const schema = type === "Update" ? updateProductSchema : insertProductSchema;
-  const form = useForm<ProductFormValues>({
-    resolver: zodResolver(schema),
+  const form = useForm<ProductFormValues, any, ProductFormValues>({
+    resolver: zodResolver(insertProductSchema),
     defaultValues:
       product && type === "Update" ? product : productDefaultValues,
   });
 
   const onSubmit: SubmitHandler<ProductFormValues> = async (values) => {
-    if (type === "Update" && !productId) {
-      router.push("/admin/products");
-      return;
+    // On Create
+    if (type === "Create") {
+      const res = await createProduct(values);
+
+      if (!res.success) {
+        toast.error(res.message);
+      } else {
+        toast.success(res.message);
+        router.push("/admin/products");
+      }
     }
 
-    const data =
-      type === "Update"
-        ? ({ ...values, id: productId } as z.infer<typeof updateProductSchema>)
-        : values;
+    // On Update
+    if (type === "Update") {
+      if (!productId) {
+        router.push("/admin/products");
+        return;
+      }
 
-    const action = type === "Create" ? createProduct : updateProduct;
+      const res = await updateProduct({ ...values, id: productId });
 
-    const res = await action(data as Parameters<typeof action>[0]);
-
-    if (!res.success) {
-      toast.error(res.message);
-    } else {
-      toast.success(res.message);
-      router.push("/admin/products");
+      if (!res.success) {
+        toast.error(res.message);
+      } else {
+        toast.success(res.message);
+        router.push("/admin/products");
+      }
     }
   };
 
