@@ -28,7 +28,7 @@ import { productDefaultValues } from "@/lib/constants";
 import { createProduct, updateProduct } from "@/lib/actions/product.actions";
 import { UploadButton } from "@/lib/uploadthing";
 
-type ProductFormValues = z.infer<typeof insertProductSchema>;
+type ProductFormValues = z.input<typeof insertProductSchema>;
 
 const ProductForm = ({
   type,
@@ -41,7 +41,7 @@ const ProductForm = ({
 }) => {
   const router = useRouter();
 
-  const form = useForm<ProductFormValues, any, ProductFormValues>({
+  const form = useForm<ProductFormValues>({
     resolver: zodResolver(insertProductSchema),
     defaultValues:
       product && type === "Update" ? product : productDefaultValues,
@@ -50,7 +50,8 @@ const ProductForm = ({
   const onSubmit: SubmitHandler<ProductFormValues> = async (values) => {
     // On Create
     if (type === "Create") {
-      const res = await createProduct(values);
+      const product = insertProductSchema.parse(values);
+      const res = await createProduct(product);
 
       if (!res.success) {
         toast.error(res.message);
@@ -66,8 +67,8 @@ const ProductForm = ({
         router.push("/admin/products");
         return;
       }
-
-      const res = await updateProduct({ ...values, id: productId });
+      const product = updateProductSchema.parse({ ...values, id: productId });
+      const res = await updateProduct(product);
 
       if (!res.success) {
         toast.error(res.message);
@@ -182,7 +183,16 @@ const ProductForm = ({
               <FormItem className="w-full">
                 <FormLabel>Stock</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter stock" {...field} />
+                  <Input
+                    type="text"
+                    placeholder="Enter stock"
+                    value={(field.value as number) ?? ""}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      // type is NaN default 0
+                      field.onChange(isNaN(+val) ? "0" : Number(val));
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

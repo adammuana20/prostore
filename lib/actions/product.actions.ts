@@ -148,10 +148,10 @@ export async function deleteProduct(id: string) {
 }
 
 // CREATE A PRODUCT
-export async function createProduct(data: z.infer<typeof insertProductSchema>) {
+export async function createProduct(
+  product: z.infer<typeof insertProductSchema>,
+) {
   try {
-    const product = insertProductSchema.parse(data);
-
     await prisma.product.create({ data: product });
 
     revalidatePath("/admin/products");
@@ -169,9 +169,10 @@ export async function createProduct(data: z.infer<typeof insertProductSchema>) {
 }
 
 // UPDATE A PRODUCT
-export async function updateProduct(data: z.infer<typeof updateProductSchema>) {
+export async function updateProduct(
+  product: z.infer<typeof updateProductSchema>,
+) {
   try {
-    const product = updateProductSchema.parse(data);
     const productExists = await prisma.product.findFirst({
       where: { id: product.id },
     });
