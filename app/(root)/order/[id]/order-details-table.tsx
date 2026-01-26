@@ -21,6 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import StripePayment from "./stripe-payment";
 
 import {
   createPayPalOrder,
@@ -35,10 +36,12 @@ import { Order } from "@/types";
 const OrderDetailsTable = ({
   order,
   paypalClientId,
+  stripeClientSecret,
   isAdmin,
 }: {
   order: Order;
   paypalClientId: string;
+  stripeClientSecret: string | null;
   isAdmin: boolean;
 }) => {
   const {
@@ -235,6 +238,7 @@ const OrderDetailsTable = ({
                 <div>Total</div>
                 <div>{formatCurrency(totalPrice)}</div>
               </div>
+
               {/* PayPal Payment */}
               {!isPaid && paymentMethod === "PayPal" && (
                 <div>
@@ -246,6 +250,15 @@ const OrderDetailsTable = ({
                     />
                   </PayPalScriptProvider>
                 </div>
+              )}
+
+              {/* Stripe Payment */}
+              {!isPaid && paymentMethod === "Stripe" && stripeClientSecret && (
+                <StripePayment
+                  priceInCents={Number(order.totalPrice) * 100}
+                  orderId={order.id}
+                  clientSecret={stripeClientSecret}
+                />
               )}
 
               {/* Cash On Delivery */}
