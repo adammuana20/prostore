@@ -5,36 +5,24 @@ import { updateOrderToPaid } from "@/lib/actions/order.actions";
 
 export async function POST(req: NextRequest) {
   // Build the webhook event
-  let event: Stripe.Event;
-  try {
-    event = await Stripe.webhooks.constructEvent(
-      await req.text(),
-      req.headers.get("stripe-signature") as string,
-      process.env.STRIPE_WEBHOOK_SECRET as string,
-    );
-  } catch (err) {
-    console.error("❌ Stripe signature verification failed", err);
-    return NextResponse.json({ error: "Webhook error" }, { status: 400 });
-  }
+  const event = await Stripe.webhooks.constructEvent(
+    await req.text(),
+    req.headers.get("stripe-signature") as string,
+    process.env.STRIPE_WEBHOOK_SECRET as string,
+  );
 
   // Check for successful payment
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
-
-    const orderId = session.metadata?.orderId;
-    if (!orderId) {
-      console.error("❌ Missing orderId in Stripe metadata");
-      return NextResponse.json({ error: "Missing orderId" }, { status: 400 });
-    }
+  if (event.type === "charge.succeeded") {
+    const { object } = event.data;
 
     // Update order status
     await updateOrderToPaid({
-      orderId: session.metadata!.orderId,
+      orderId: object.metadata.orderId,
       paymentResult: {
-        id: session.id,
+        id: object.id,
         status: "COMPLETED",
-        email_address: session.customer_email!,
-        pricePaid: (session.amount_total! / 100).toFixed(),
+        email_address: object.billing_details.email!,
+        pricePaid: (object.amount / 100).toFixed(),
       },
     });
 
