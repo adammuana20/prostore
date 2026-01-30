@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       paymentResult: {
         id: session.id,
         status: "COMPLETED",
-        email_address: session.customer_details!.email!,
+        email_address: session.customer_email!,
         pricePaid: (session.amount_total! / 100).toFixed(),
       },
     });
