@@ -21,7 +21,59 @@ import { Card, CardContent } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
 import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
 
-import { Cart } from "@/types";
+import { Cart, CartItem } from "@/types";
+
+function AddButton({ item }: { item: CartItem }) {
+  const [isPending, startTransition] = useTransition();
+  return (
+    <Button
+      disabled={isPending}
+      variant="outline"
+      type="button"
+      onClick={() =>
+        startTransition(async () => {
+          const res = await addItemToCart(item);
+
+          if (!res.success) {
+            toast.success(res.message);
+          }
+        })
+      }
+    >
+      {isPending ? (
+        <Loader className="w-4 h-4 animate-spin" />
+      ) : (
+        <Plus className="w-4 h-4" />
+      )}
+    </Button>
+  );
+}
+
+function RemoveButton({ item }: { item: CartItem }) {
+  const [isPending, startTransition] = useTransition();
+  return (
+    <Button
+      disabled={isPending}
+      variant="outline"
+      type="button"
+      onClick={() =>
+        startTransition(async () => {
+          const res = await removeItemFromCart(item.productId);
+
+          if (!res.success) {
+            toast.success(res.message);
+          }
+        })
+      }
+    >
+      {isPending ? (
+        <Loader className="w-4 h-4 animate-spin" />
+      ) : (
+        <Minus className="w-4 h-4" />
+      )}
+    </Button>
+  );
+}
 
 const CartTable = ({ cart }: { cart?: Cart }) => {
   const router = useRouter();
@@ -63,55 +115,9 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
                       </Link>
                     </TableCell>
                     <TableCell className="flex-center gap-2">
-                      <Button
-                        disabled={isPending}
-                        variant="outline"
-                        type="button"
-                        onClick={() =>
-                          startTransition(async () => {
-                            const res = await removeItemFromCart(
-                              item.productId
-                            );
-
-                            if (!res.success) {
-                              toast.error(res.message);
-                              return;
-                            }
-
-                            toast.success(res.message);
-                          })
-                        }
-                      >
-                        {isPending ? (
-                          <Loader className="w-4 h-4 animate-spin" />
-                        ) : (
-                          <Minus className="h-4 w-4" />
-                        )}
-                      </Button>
+                      <RemoveButton item={item} />
                       <span>{item.qty}</span>
-                      <Button
-                        disabled={isPending}
-                        variant="outline"
-                        type="button"
-                        onClick={() =>
-                          startTransition(async () => {
-                            const res = await addItemToCart(item);
-
-                            if (!res.success) {
-                              toast.error(res.message);
-                              return;
-                            }
-
-                            toast.success(res.message);
-                          })
-                        }
-                      >
-                        {isPending ? (
-                          <Loader className="w-4 h-4 animate-spin" />
-                        ) : (
-                          <Plus className="h-4 w-4" />
-                        )}
-                      </Button>
+                      <AddButton item={item} />
                     </TableCell>
                     <TableCell className="text-right">${item.price}</TableCell>
                   </TableRow>

@@ -1,6 +1,8 @@
 import ProductList from "@/components/shared/product/product-list";
 import ProductCarousel from "@/components/shared/product/product-carousel";
 import ViewAllProductsButton from "@/components/view-all-products-button";
+import IconBoxes from "@/components/icon-boxes";
+import DealCountdown from "@/components/deal-countdown";
 
 import {
   getFeaturedProducts,
@@ -23,6 +25,8 @@ const Homepage = async () => {
         limit={LATEST_PRODUCTS_LIMIT}
       />
       <ViewAllProductsButton />
+      <DealCountdown />
+      <IconBoxes />
     </>
   );
 };
