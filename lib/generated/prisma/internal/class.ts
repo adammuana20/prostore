@@ -23,7 +23,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "C:\\Users\\Adam.Muana\\OneDrive - Entain Group\\Desktop\\Next JS\\E-Commerce\\prostore\\lib\\generated\\prisma",
+      "value": "D:\\My Projects\\NextJS\\prostore\\lib\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -37,7 +37,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Adam.Muana\\OneDrive - Entain Group\\Desktop\\Next JS\\E-Commerce\\prostore\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\My Projects\\NextJS\\prostore\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../../prisma",
