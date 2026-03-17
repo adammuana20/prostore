@@ -1,15 +1,15 @@
-##🛒 Fullstack E-commerce Platform (Next.js)
+## 🛒 Fullstack E-commerce Platform (Next.js)
 
 A production-ready fullstack e-commerce application built to simulate real-world online store workflows built with modern web technologies. This project demonstrates real-world features such as authentication, payments, admin dashboards, and scalable architecture.
 
-##🚀 Live Demo
+## 🚀 Live Demo
 👉 [https://prostore-iota-five.vercel.app/](https://prostore-iota-five.vercel.app/)
 
-##📌 Overview
+## 📌 Overview
 
 This application allows users to browse products, add items to cart, and securely complete purchases. It also includes an admin dashboard for managing products, orders, and viewing analytics.
 
-##🧰 Tech Stack
+## 🧰 Tech Stack
 
 Frontend
 
@@ -64,9 +64,9 @@ Deployment
 Vercel
 
 
-##✨ Features
+## ✨ Features
 
-###🛍️ User Features
+### 🛍️ User Features
 
 Browse and search products
 
@@ -79,7 +79,7 @@ Authentication (login/signup with OAuth)
 Order history tracking
 
 
-##🛠️ Admin Features
+## 🛠️ Admin Features
 
 Dashboard with sales analytics (Recharts)
 
@@ -90,7 +90,7 @@ Order management
 User management
 
 
-##🧠 Key Highlights
+## 🧠 Key Highlights
 
 Built using Next.js App Router with server components for improved performance
 
@@ -112,23 +112,23 @@ Ensured code quality with Jest testing and ESLint
 - Implemented dual payment gateways (Stripe & PayPal) for flexibility
 
 
-##📸 Screenshots
+## 📸 Screenshots
 
-###Homepage
+### Homepage
 ![Homepage 1](/images/screenshots/homepage-1)
 ![Homepage 2](/images/screenshots/homepage-2)
 
-###Product Page
+### Product Page
 ![Product Page 1](/images/screenshots/product-page-1)
 ![Product Page 2](/images/screenshots/product-page-2)
 
-###Checkout Flow
+### Checkout Flow
 ![Checkout 1](/images/screenshots/checkout-1)
 ![Checkout 2](/images/screenshots/checkout-2)
 ![Checkout 3](/images/screenshots/checkout-3)
 ![Checkout 4](/images/screenshots/checkout-4)
 
-###Admin Dashboard
+### Admin Dashboard
 ![Admin Dashboard 1](/images/screenshots/admin-dashboard-1)
 ![Admin Dashboard 2](/images/screenshots/admin-dashboard-2)
 ![Admin Dashboard 3](/images/screenshots/admin-dashboard-3)
@@ -172,12 +172,12 @@ npm run dev
 npm run test
 
 
-📦 Deployment
+## 📦 Deployment
 
 Deployed on Vercel with environment-based configuration.
 
 
-📈 What I Learned
+## 📈 What I Learned
 
 Building scalable fullstack applications using Next.js App Router
 
@@ -190,7 +190,7 @@ Designing relational databases with Prisma and PostgreSQL
 Writing maintainable and testable code using Jest
 
 
-👤 Author
+## 👤 Author
 
 Adam Clint Muaña
 
