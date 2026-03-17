@@ -13,55 +13,55 @@ This application allows users to browse products, add items to cart, and securel
 
 Frontend
 
-Next.js (App Router, Server Components)
+- Next.js (App Router, Server Components)
 
-React
+- React
 
-TypeScript
+- TypeScript
 
-Tailwind CSS / shadcn/ui
+- Tailwind CSS / shadcn/ui
 
 
 Backend & Database
 
-PostgreSQL
+- PostgreSQL
 
-Prisma ORM
+- Prisma ORM
 
-Next.js Server Actions / API Routes
+- Next.js Server Actions / API Routes
 
 
 Authentication
 
-NextAuth (JWT, Sessions, OAuth)
+- NextAuth (JWT, Sessions, OAuth)
 
 
 Payments & Services
 
-Stripe
+- Stripe
 
-PayPal
+- PayPal
 
-Resend (Transactional Emails)
+- Resend (Transactional Emails)
 
 
 Forms & Validation
 
-React Hook Form
+- React Hook Form
 
-Zod
+- Zod
 
 
 Testing & Tooling
 
-Jest
+- Jest
 
-ESLint
+- ESLint
 
 
 Deployment
 
-Vercel
+- Vercel
 
 
 ## ✨ Features
@@ -115,23 +115,23 @@ Ensured code quality with Jest testing and ESLint
 ## 📸 Screenshots
 
 ### Homepage
-![Homepage 1](/images/screenshots/homepage-1)
-![Homepage 2](/images/screenshots/homepage-2)
+![Homepage 1](public/images/screenshots/homepage-1.png)
+![Homepage 2](public/images/screenshots/homepage-2.png)
 
 ### Product Page
-![Product Page 1](/images/screenshots/product-page-1)
-![Product Page 2](/images/screenshots/product-page-2)
+![Product Page 1](public/images/screenshots/product-page-1.png)
+![Product Page 2](public/images/screenshots/product-page-2.png)
 
 ### Checkout Flow
-![Checkout 1](/images/screenshots/checkout-1)
-![Checkout 2](/images/screenshots/checkout-2)
-![Checkout 3](/images/screenshots/checkout-3)
-![Checkout 4](/images/screenshots/checkout-4)
+![Checkout 1](public/images/screenshots/checkout-1.png)
+![Checkout 2](public/images/screenshots/checkout-2.png)
+![Checkout 3](public/images/screenshots/checkout-3.png)
+![Checkout 4](public/images/screenshots/checkout-4.png)
 
 ### Admin Dashboard
-![Admin Dashboard 1](/images/screenshots/admin-dashboard-1)
-![Admin Dashboard 2](/images/screenshots/admin-dashboard-2)
-![Admin Dashboard 3](/images/screenshots/admin-dashboard-3)
+![Admin Dashboard 1](public/images/screenshots/admin-dashboard-1.png)
+![Admin Dashboard 2](public/images/screenshots/admin-dashboard-2.png)
+![Admin Dashboard 3](public/images/screenshots/admin-dashboard-3.png)
 
 
 ⚙️ Installation & Setup
