@@ -196,6 +196,6 @@ Adam Clint Muaña
 
 Frontend / Fullstack Developer
 
-Portfolio: https://adam-muana.netlify.app
+- Portfolio: [https://adam-muana.netlify.app](https://adam-muana.netlify.app)
 
-GitHub: https://github.com/adammuana20
+- GitHub: [https://github.com/adammuana20](https://github.com/adammuana20)
